@@ -1,10 +1,3 @@
----
-
-### 3. Inhalt für deine CI-Pipeline (Fertig zum Kopieren)
-
-Erstelle in deinem Repo den Ordner `.github/workflows` und darin die Datei `ci.yml`. Füge das hier ein:
-
-```yaml
 name: Python CI
 
 on:
@@ -36,10 +29,10 @@ jobs:
 
     - name: Lint with Ruff
       run: |
-        # Zeigt Fehler an, bricht aber (erstmal) nicht ab, falls ihr noch am Anfang seid
+        # Zeigt Fehler an, bricht aber (erstmal) nicht ab
         ruff check . || true 
 
     - name: Test with pytest
       run: |
-        # Führt Tests aus, falls welche da sind
+        # Führt Tests aus
         pytest || true
