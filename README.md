@@ -31,8 +31,8 @@ Die Parameter der Interaktionsmatrix können in `config.py` angepasst werden.
 
 ### Repository klonen und starten
 ```bash
-git clone https://github.com/LuanJasari/Biology-inspired-algorithms---emergent-behavier.git
-cd Biology-inspired-algorithms---emergent-behavier
+git clone https://github.com/LuanJasari/particle-life-hsd.git
+cd particle-life-hsd
 
 pip install -r requirements.txt
 python main.py
