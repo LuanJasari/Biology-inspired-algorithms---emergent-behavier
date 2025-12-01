@@ -10,13 +10,16 @@ class Interaction:
         # Füllt die Matrix direkt beim Start mit Zufallszahlen
         self.randomize_matrix()
 
-    def randomize_matrix(self):
+    def make_matrix(self):
         # Wir laufen durch jede Zeile und Spalte
         for i in range(self.num_types):
             for j in range(self.num_types):
-                # Zufallswert zwischen -1 (Abstoßung) und 1 (Anziehung)
-                random_value = random.uniform(-1.0, 1.0)
-                self.matrix[i][j] = random_value
+                if i == j:
+                    # gleiche "Farben" = Anziehung
+                    self.matrix[i, j] = 1
+                else:
+                    # unterschiedliche "Farben" stoßen sich 
+                    self.matrix[i, j] = -1
 
     def force_function(self, i, d, max_dist):
         """
