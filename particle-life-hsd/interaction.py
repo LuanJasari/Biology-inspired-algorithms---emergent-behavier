@@ -1,4 +1,5 @@
 import numpy as np
+from astropy.utils.metadata.utils import dtype
 
 
 class Interaction:
@@ -21,10 +22,7 @@ class Interaction:
 
         # Die Interaktions-Matrix (N_types x N_types)
         # Wertebereich: -1.0 (Abstoßung) bis +1.0 (Anziehung)
-        self.matrix = np.zeros((num_types, num_types))
-
-        # Initialisiert die Standard-Regeln
-        self._make_default_matrix()
+        self.matrix = self._make_default_matrix()
 
         print(f"--> [Interaction] Initialisiert: {num_types} Typen")
 
@@ -34,18 +32,18 @@ class Interaction:
 
     def _make_default_matrix(self):
         """
-        Füllt die Matrix mit Startwerten (Vektorisierte Initialisierung).
-        Regel: Gleiche ziehen sich an (+1), Ungleiche stoßen sich ab (-1).
+        Eine Interaktionsmatrix mit selbst definierten Regeln
         """
         # Setze erst mal alles auf Abstoßung (-1.0)
-        self.matrix.fill(-1.0)
+        matrix= np.array([
+            [1.0, -0.9,  0.5, -0.8],
+            [-0.9,  1.0, -0.1,  0.6],
+            [0.5, -0.1,  1.0, -0.8],
+            [-0.8,  0.6, -0.8,  1.0]
+        ], dtype=float
+        )
 
-        # Setze die Diagonale (Gleiche Farben) auf Anziehung (+1.0)
-        np.fill_diagonal(self.matrix, 1.0)
-
-        # Optional: Zufällige kleine Variationen für interessanteres Verhalten
-        # self.matrix += np.random.uniform(-0.1, 0.1, size=self.matrix.shape)
-        return self.matrix
+        return matrix
 
     def get_rule_grid(self, types_array: np.ndarray) -> np.ndarray:
         """
@@ -65,3 +63,6 @@ class Interaction:
         # Broadcasting sorgt dafür, dass wir eine N x N Matrix erhalten.
         # Zeile i, Spalte j = self.matrix[type_i, type_j]
         return self.matrix[types_array[:, np.newaxis], types_array[np.newaxis, :]]
+
+i=Interaction(4)
+print(i.matrix)

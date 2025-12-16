@@ -8,7 +8,7 @@ def main():
     print("=== Particle Life Simulator (Milestone 3 Build) ===")
 
     # 1. Konfiguration
-    NUMBER_OF_PARTICLES = 1500  # Startwert für flüssige 60 FPS
+    NUMBER_OF_PARTICLES = 150  # Startwert für flüssige 60 FPS
     NUMBER_OF_TYPES = 4
 
     # Physik-Parameter (Experimentiere hiermit für cooles Verhalten!)
@@ -23,10 +23,8 @@ def main():
     print("-> Initialisiere Regeln...")
     interactions = Interaction(NUMBER_OF_TYPES)
 
-    # Kleiner Hack: Setze eine zufällige Matrix für spannenderes Start-Verhalten
-    # (Sonst stoßen sich standardmäßig alle ab, siehe interaction.py)
-    import numpy as np
-    interactions.matrix = np.random.uniform(-0.5, 1.0, size=(NUMBER_OF_TYPES, NUMBER_OF_TYPES))
+
+    #interactions.matrix = np.random.uniform(-0.5, 1.0, size=(NUMBER_OF_TYPES, NUMBER_OF_TYPES))
 
     print("-> Starte Physik-Engine...")
     sim = Simulation(DT, MAX_R, FRICTION, particles, interactions)

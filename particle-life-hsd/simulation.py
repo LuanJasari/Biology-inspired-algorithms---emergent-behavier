@@ -44,7 +44,7 @@ class Simulation:
     def compute_forces(self):
         force_variable_matrix=  1 - (self.compute_distances()/self.max_r)
         # if distance > max_r --> force_variable=0
-        force_variable_matrix= np.clip(force_variable_matrix, 0.0, 1)
+        force_variable_matrix= np.clip(force_variable_matrix, 0.0, None)
         force_scalar_matrix= self.interaction.get_rule_grid(self.particles.types) * force_variable_matrix
         return force_scalar_matrix
 
